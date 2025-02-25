@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add Services To DI
 
+builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+
 var app = builder.Build();
 
 app.MapGet("/todoitems", async (AppDbContext db) => await db.Todos.ToListAsync());
